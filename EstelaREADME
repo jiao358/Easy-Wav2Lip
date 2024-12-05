@@ -1,0 +1,62 @@
+# GUI 功能说明文档
+
+## 主要交互功能
+
+### 1. 文件操作
+- 打开文件（Open File）：允许用户选择并加载音频文件
+- 保存文件（Save File）：保存处理后的音频文件
+- 导出文件（Export）：将处理后的音频导出为新文件
+
+### 2. 音频控制
+- 播放/暂停（Play/Pause）：控制音频的播放和暂停
+- 停止（Stop）：停止音频播放
+- 音量调节（Volume Control）：调整音频播放音量
+- 进度条控制（Progress Bar）：显示播放进度，支持拖动调整播放位置
+
+### 3. 音频处理功能
+- 变调（Pitch Shift）：调整音频的音调
+- 速度调整（Speed Control）：改变音频播放速度
+- 音频剪辑（Trim）：剪切选定部分的音频
+- 音频效果（Effects）：添加各种音频效果
+
+### 4. 可视化显示
+- 波形显示（Waveform Display）：显示音频的波形图
+- 频谱显示（Spectrum Display）：显示音频的频谱图
+- 时间轴（Timeline）：显示音频时间信息
+
+## 具体方法说明
+
+### 文件处理方法
+- `open_file()`: 打开文件选择对话框并加载音频文件
+- `save_file()`: 保存当前处理的音频文件
+- `export_file()`: 导出处理后的音频为新文件
+
+### 音频控制方法
+- `play_audio()`: 播放音频
+- `pause_audio()`: 暂停音频播放
+- `stop_audio()`: 停止音频播放
+- `set_volume(value)`: 设置音频音量
+- `update_progress()`: 更新进度条位置
+
+### 音频处理方法
+- `pitch_shift(semitones)`: 调整音频音调
+- `change_speed(factor)`: 改变音频播放速度
+- `trim_audio(start, end)`: 剪切音频片段
+- `apply_effect(effect_type)`: 应用音频效果
+
+### 可视化方法
+- `update_waveform()`: 更新波形显示
+- `update_spectrum()`: 更新频谱显示
+- `update_timeline()`: 更新时间轴显示
+
+## 使用提示
+1. 建议先加载音频文件再进行处理
+2. 音频处理操作支持撤销/重做
+3. 保存文件前请确认处理效果
+4. 大文件处理可能需要较长时间，请耐心等待
+
+## 注意事项
+- 支持的音频格式：WAV, MP3, FLAC等
+- 建议处理前备份原始文件
+- 某些处理操作可能不可逆
+- 内存占用随音频文件大小增加 
