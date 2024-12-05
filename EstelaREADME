@@ -1,6 +1,171 @@
 # GUI 功能说明文档
 
-## 主要交互功能
+## GUI.py 功能说明
+
+### 类结构
+1. `AudioProcessor` 类
+   - 音频处理的核心类
+   - 管理音频数据的加载和保存
+   - 提供音频处理的各种方法
+
+2. `GUI` 类
+   - 继承自 `tk.Tk`
+   - 实现主窗口界面
+   - 管理所有GUI组件和事件
+
+### 主要方法
+
+#### 文件操作方法
+```python
+def open_file(self):
+    """打开音频文件并加载到程序中"""
+
+def save_file(self):
+    """保存当前处理后的音频"""
+
+def export_file(self):
+    """导出音频为新文件"""
+```
+
+#### 音频控制方法
+```python
+def play_audio(self):
+    """播放音频"""
+
+def pause_audio(self):
+    """暂停音频播放"""
+
+def stop_audio(self):
+    """停止音频播放"""
+
+def set_volume(self, value):
+    """设置音频音量"""
+
+def update_progress(self):
+    """更新进度条"""
+```
+
+#### 音频处理方法
+```python
+def pitch_shift(self, semitones):
+    """调整音频音调
+    Args:
+        semitones (float): 音调变化的半音数
+    """
+
+def change_speed(self, factor):
+    """改变���频速度
+    Args:
+        factor (float): 速度变化因子
+    """
+
+def trim_audio(self, start, end):
+    """剪切音频片段
+    Args:
+        start (float): 起始时间（秒）
+        end (float): 结束时间（秒）
+    """
+```
+
+#### 可视化方法
+```python
+def update_waveform(self):
+    """更新波形显示"""
+
+def update_spectrum(self):
+    """更新频谱显示"""
+
+def update_timeline(self):
+    """更新时间轴显示"""
+```
+
+### 使用示例
+```python
+# 创建GUI实例
+app = GUI()
+
+# 运行应用
+app.mainloop()
+```
+
+### 事件绑定
+- 文件菜单事件
+- 播放控制事件
+- 进度条拖动事件
+- 音量调节事件
+- 快捷键绑定
+
+### 界面布局
+1. 菜单栏
+   - 文件菜单
+   - 编辑菜单
+   - 帮助菜单
+
+2. 工具栏
+   - 播放控制按钮
+   - 音量控制
+   - 处理工具按钮
+
+3. 主界面
+   - 波形显示区域
+   - 频谱显示区域
+   - 时间轴
+   - 控制面板
+
+### 调用流程
+1. 初始化
+   ```python
+   from gui import GUI
+   app = GUI()
+   ```
+
+2. 音频处理
+   ```python
+   # 打开文件
+   app.open_file()
+   
+   # 处理音频
+   app.pitch_shift(2)  # 升高2个半音
+   app.change_speed(1.5)  # 加快1.5倍
+   
+   # 保存结果
+   app.save_file()
+   ```
+
+3. 运行应用
+   ```python
+   app.mainloop()
+   ```
+
+## 项目文件结构说明
+
+### 核心文件
+1. `app.py`
+   - Flask Web应用的主入口
+   - 提供音频处理的Web API接口
+   - 包含AudioProcessor类，处理音频变调和速度调整
+   - 管理文件上传和下载功能
+
+2. `easy_functions.py`
+   - 提供项目的核心功能函数
+   - 处理配置文件的读写
+   - 实现音频和视频的基础处理功能
+   - 提供工具函数和辅助方法
+
+### 模型文件 (models/)
+1. `wav2lip.py`
+   - 实现Wav2Lip模型的核心架构
+   - 包含唇形同步的神经网络模型
+   - 处理音频和视频的同步对齐
+   - 生成最终的唇形同步结果
+
+2. `conv.py`
+   - 包含卷积神经网络的基础组件
+   - 定义了模型中使用的各种卷积层
+   - 提供网络架构的基础构建块
+   - 支持模型的特征提取功能
+
+## Web界面功能
 
 ### 1. 文件操作
 - 打开文件（Open File）：允许用户选择并加载音频文件
@@ -11,7 +176,7 @@
 - 播放/暂停（Play/Pause）：控制音频的播放和暂停
 - 停止（Stop）：停止音频播放
 - 音量调节（Volume Control）：调整音频播放音量
-- 进度条控制（Progress Bar）：显示播放进度，支持拖动调整播放位置
+- 进度条控制（Progress Bar）：显示播放进度，支��拖动调整播放位置
 
 ### 3. 音频处理功能
 - 变调（Pitch Shift）：调整音频的音调
@@ -24,30 +189,14 @@
 - 频谱显示（Spectrum Display）：显示音频的频谱图
 - 时间轴（Timeline）：显示音频时间信息
 
-## 具体方法说明
-
-### 文件处理方法
-- `open_file()`: 打开文件选择对话框并加载音频文件
-- `save_file()`: 保存当前处理的音频文件
-- `export_file()`: 导出处理后的音频为新文件
-
-### 音频控制方法
-- `play_audio()`: 播放音频
-- `pause_audio()`: 暂停音频播放
-- `stop_audio()`: 停止音频播放
-- `set_volume(value)`: 设置音频音量
-- `update_progress()`: 更新进度条位置
-
-### 音频处理方法
-- `pitch_shift(semitones)`: 调整音频音调
-- `change_speed(factor)`: 改变音频播放速度
-- `trim_audio(start, end)`: 剪切音频片段
-- `apply_effect(effect_type)`: 应用音频效果
-
-### 可视化方法
-- `update_waveform()`: 更新波形显示
-- `update_spectrum()`: 更新频谱显示
-- `update_timeline()`: 更新时间轴显示
+## 配置说明
+项目使用 `config.ini` 进行配置管理，包含以下主要设置：
+- 视频和音频文件路径
+- 处理质量选项
+- 输出分辨率设置
+- Wav2Lip版本选择
+- 遮罩和填充参数
+- 批处理选项
 
 ## 使用提示
 1. 建议先加载音频文件再进行处理
@@ -59,4 +208,27 @@
 - 支持的音频格式：WAV, MP3, FLAC等
 - 建议处理前备份原始文件
 - 某些处理操作可能不可逆
-- 内存占用随音频文件大小增加 
+- 内存占用随音频文件大小增加
+- 需要确保所有依赖库正确安装
+- 模型文件需要放置在正确的目录下
+
+## 技术依赖
+项目依赖于多个Python库，包括但不限于：
+- Flask：Web应用框架
+- librosa：音频处理
+- numpy：数学计算
+- torch：���度学习框架
+- opencv-python：图像处理
+- moviepy：视频处理
+- werkzeug：文件上传和工具函数
+- soundfile：音频文件处理
+- requests：HTTP请求处理
+- flask-cors：跨域请求支持
+- basicsr：基础超分辨率工具
+- gfpgan：人脸增强
+- facexlib：人脸处理库
+- imageio-ffmpeg：视频编解码
+- dlib：人脸检测和特征点提取
+- pytest：单元测试
+- black：代码格式化
+- pylint：代码质量检查
